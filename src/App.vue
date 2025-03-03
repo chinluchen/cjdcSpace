@@ -4,83 +4,32 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header class="bg-gray-900 text-white py-5">
+    <div class="container mx-auto flex flex-col items-center">
+      <img alt="Vue logo" class="w-32 h-32 mb-4" src="@/assets/logo.svg" />
 
-    <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/projects">Project</RouterLink>
+      <nav class="mt-4">
+        <RouterLink to="/" class="px-4 py-2 text-lg hover:text-blue-400">Home</RouterLink>
+        <RouterLink to="/about" class="px-4 py-2 text-lg hover:text-blue-400">About</RouterLink>
+        <RouterLink to="/projects" class="px-4 py-2 text-lg hover:text-blue-400">Projects</RouterLink>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main class="min-h-screen flex items-center justify-center bg-gray-100">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: #38bdf8; /* Tailwind 的淺藍色 */
+  font-weight: bold;
 }
 
 nav a.router-link-exact-active:hover {
   background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>
