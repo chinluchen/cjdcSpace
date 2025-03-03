@@ -13,7 +13,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 確保完整的 commit 記錄
+          token: ${{ secrets.ACCESS_TOKEN }}  # 使用 Personal Access Token
+          fetch-depth: 0  # 確保完整的 commit 記錄，避免 push 失敗
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -21,15 +22,15 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install  # 執行 npm install
+        run: npm install  # 安裝專案依賴
 
       - name: Build Project
-        run: npm run build  # 執行 npm run build，產生網站檔案
+        run: npm run build  # 建置專案，產生 deploy 檔案
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token，確保有權限
+          token: ${{ secrets.ACCESS_TOKEN }}  # 使用 Personal Access Token
           branch: gh-pages  # 發布到 `gh-pages`
           folder: dist       # Vue + Vite 預設輸出目錄
           clean: true        # 清理舊檔案，確保更新版本
