@@ -3,7 +3,7 @@ name: Deploy Preview to GitHub Pages
 on:
   push:
     branches:
-      - dev  # 只有當 `dev` 分支有變更時才執行
+      - dev  # 只有 `dev` 分支變更時才部署
 
 jobs:
   deploy:
@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 確保完整的 commit 記錄
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,7 +27,4 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages  # 發布到 `gh-pages` 分支
-          folder: dist       # Vite 預設輸出目錄
+       
