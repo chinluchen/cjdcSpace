@@ -1,0 +1,31 @@
+name: Deploy Preview to GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev  # 只有當 `dev` 分支有變更時才執行
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # 發布到 `gh-pages` 分支
+          folder: dist       # Vite 預設輸出目錄
