@@ -21,10 +21,15 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install  # 執行 npm install
 
       - name: Build Project
-        run: npm run build
+        run: npm run build  # 執行 npm run build，產生網站檔案
 
       - name: Deploy to GitHub Pages
-       
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token，確保有權限
+          branch: gh-pages  # 發布到 `gh-pages`
+          folder: dist       # Vue + Vite 預設輸出目錄
+          clean: true        # 清理舊檔案，確保更新版本
